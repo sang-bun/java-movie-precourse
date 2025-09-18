@@ -1,5 +1,6 @@
 package movie;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +50,18 @@ public class Reservation {
 
         return 12000;
 
+    }
+
+    public int movieDayDiscount(int price){
+        LocalDateTime startTime = this.playSchedule.getStartTime();
+
+        int dayOfMonth = startTime.getDayOfMonth();
+
+        if (dayOfMonth == 10 || dayOfMonth == 20 || dayOfMonth == 30) {
+            return price * 90 / 100;
+        }
+
+        return price;
     }
 
 

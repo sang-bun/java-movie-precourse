@@ -41,4 +41,19 @@ public class ReservationTest {
 
     }
 
+    @Test
+    @DisplayName("무비데이 할인 적용")
+    void MovieDayDiscount(){
+        Movie movie = new Movie("미니언즈", 123, 18000, 1);
+        LocalDateTime startTime = LocalDateTime.of(2025, 9, 10, 14, 0);
+        PlaySchedule schedule = new PlaySchedule(movie, startTime, 80);
+        Reservation reservation = new Reservation(schedule, 2);
+
+        int price = 20000;
+
+        int discountedPrice = reservation.movieDayDiscount(price);
+
+        assertThat(discountedPrice).isEqualTo(18000);
+    }
+
 }
