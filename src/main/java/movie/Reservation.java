@@ -75,5 +75,12 @@ public class Reservation {
         return price;
     }
 
+    public int points(int price, int point){
+        if(price < point){
+            return 0;
+        }
+        return price - point;
+    }
+
 
 }

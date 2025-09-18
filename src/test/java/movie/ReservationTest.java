@@ -71,4 +71,28 @@ public class ReservationTest {
 
         assertThat(discountedPrice).isEqualTo(18000);
     }
+
+    @Test
+    @DisplayName("포인트 사용 포인트가 돈보다 작을때")
+    void Points(){
+        Reservation reservation = new Reservation(null, 0);
+        int price = 20000;
+        int point = 5000;
+
+        int finalPrice = reservation.points(price, point);
+
+        assertThat(finalPrice).isEqualTo(price-point);
+    }
+
+    @Test
+    @DisplayName("포인트 사용 포인트가 돈보다 많을때")
+    void PriceOverPoints(){
+        Reservation reservation = new Reservation(null, 0);
+        int price = 20000;
+        int point = 30000;
+
+        int finalPrice = reservation.points(price, point);
+
+        assertThat(finalPrice).isEqualTo(0);
+    }
 }
