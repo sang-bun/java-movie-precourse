@@ -23,4 +23,22 @@ public class ReservationTest {
         assertThat(reservation.getHeadCount()).isEqualTo(headCount);
     }
 
+    @Test
+    @DisplayName("예약할 좌석 추가")
+    void addSeat(){
+        Movie movie = new Movie("미니언즈", 123, 18000, 1);
+        LocalDateTime startTime = LocalDateTime.of(2025, 9, 18, 14, 0);
+        PlaySchedule schedule = new PlaySchedule(movie, startTime, 80);
+        Reservation reservation = new Reservation(schedule, 2);
+        Seat seatA1 = new Seat("A", 1);
+        Seat seatA2 = new Seat("A", 2);
+
+        reservation.addSeat(seatA1);
+        reservation.addSeat(seatA2);
+
+        assertThat(reservation.getSeats()).hasSize(2);
+        assertThat(reservation.getSeats()).contains(seatA1, seatA2);
+
+    }
+
 }
