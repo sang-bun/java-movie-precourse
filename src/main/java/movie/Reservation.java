@@ -27,5 +27,29 @@ public class Reservation {
         return seats;
     }
 
+    public int calculateTotalPrice() {
+        int totalPrice = 0;
+        for (Seat seat : this.seats) {
+            totalPrice += getPriceForSeat(seat);
+        }
+        return totalPrice;
+    }
+
+    public int getPriceForSeat(Seat seat) {
+        String row = seat.getRow();
+
+        // S등급을 A, B열이라고 가정
+        if("A".equals(row) || "B".equals(row)) {
+            return 18000;
+        }
+        // A등급을 C, D열이라고 가정
+        if("C".equals(row) || "D".equals(row)) {
+            return 15000;
+        }
+
+        return 12000;
+
+    }
+
 
 }
