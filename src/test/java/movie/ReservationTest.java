@@ -3,6 +3,7 @@ package movie;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDateTime;
@@ -95,4 +96,19 @@ public class ReservationTest {
 
         assertThat(finalPrice).isEqualTo(0);
     }
+
+    @ParameterizedTest
+    @CsvSource({"CREDIT_CARD, 19000", "CASH, 19600"})
+    @DisplayName("결제 수단에 따른 할인")
+    void PaymentDiscount(String payment, int expectedPrice){
+        Reservation reservation = new Reservation(null, 0);
+        int price = 20000;
+
+        int finalPrice = reservation.PaymentDiscount(price, payment);
+
+        assertThat(finalPrice).isEqualTo(expectedPrice);
+
+    }
+
+
 }

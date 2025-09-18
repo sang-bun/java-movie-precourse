@@ -82,5 +82,23 @@ public class Reservation {
         return price - point;
     }
 
+    public int PaymentDiscount(int price, String payment){
+        if(price <= 0){
+            return 0;
+        }
+        if(payment == null || payment.isEmpty()){
+            return price;
+        }
+
+        String method = payment;
+
+        if(method.equals("CREDIT_CARD")){
+            return price * 95 / 100;
+        }
+        if(method.equals("CASH")){
+            return price * 98 / 100;
+        }
+        return price;
+    }
 
 }
