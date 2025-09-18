@@ -64,5 +64,16 @@ public class Reservation {
         return price;
     }
 
+    public int timeDiscount(int price){
+        LocalDateTime startTime = this.playSchedule.getStartTime();
+
+        int hour = startTime.getHour();
+
+        if(hour < 11 || hour >= 20){
+            return price - 2000;
+        }
+        return price;
+    }
+
 
 }

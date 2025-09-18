@@ -2,6 +2,8 @@ package movie;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.time.LocalDateTime;
 
@@ -48,7 +50,6 @@ public class ReservationTest {
         LocalDateTime startTime = LocalDateTime.of(2025, 9, 10, 14, 0);
         PlaySchedule schedule = new PlaySchedule(movie, startTime, 80);
         Reservation reservation = new Reservation(schedule, 2);
-
         int price = 20000;
 
         int discountedPrice = reservation.movieDayDiscount(price);
@@ -56,4 +57,18 @@ public class ReservationTest {
         assertThat(discountedPrice).isEqualTo(18000);
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {10, 20})
+    @DisplayName("시간 조건 할인")
+    void TimeDiscount(int hour){
+        Movie movie = new Movie("미니언즈", 123, 18000, 1);
+        LocalDateTime startTime = LocalDateTime.of(2025, 9, 11, hour, 0);
+        PlaySchedule schedule = new PlaySchedule(movie, startTime, 80);
+        Reservation reservation = new Reservation(schedule, 2);
+        int price = 20000;
+
+        int discountedPrice = reservation.timeDiscount(price);
+
+        assertThat(discountedPrice).isEqualTo(18000);
+    }
 }
