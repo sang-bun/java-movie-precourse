@@ -104,11 +104,23 @@ public class ReservationTest {
         Reservation reservation = new Reservation(null, 0);
         int price = 20000;
 
-        int finalPrice = reservation.PaymentDiscount(price, payment);
+        int finalPrice = reservation.paymentDiscount(price, payment);
 
         assertThat(finalPrice).isEqualTo(expectedPrice);
 
     }
 
+    @Test
+    @DisplayName("최종 결제")
+    void finalPrice(){
+        Movie movie = new Movie("미니언즈", 123, 18000, 1);
+        LocalDateTime startTime = LocalDateTime.of(2025, 9, 10, 20, 0);
+        PlaySchedule schedule = new PlaySchedule(movie, startTime, 80);
+        Reservation reservation = new Reservation(schedule, 2);
 
+        reservation.addSeat(new Seat("A", 1));
+        int finalPrice = reservation.finalPrice(200, "CREDIT_CARD");
+
+        assertThat(finalPrice).isEqualTo(13300);
+    }
 }

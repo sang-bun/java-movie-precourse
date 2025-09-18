@@ -82,7 +82,7 @@ public class Reservation {
         return price - point;
     }
 
-    public int PaymentDiscount(int price, String payment){
+    public int paymentDiscount(int price, String payment){
         if(price <= 0){
             return 0;
         }
@@ -101,4 +101,19 @@ public class Reservation {
         return price;
     }
 
+    public int finalPrice(int point, String payment){
+        int amount = calculateTotalPrice();
+        amount = movieDayDiscount(amount);
+        amount = clamp(timeDiscount(amount));
+        amount = points(amount, point);
+        amount = paymentDiscount(amount, payment);
+        return clamp(amount);
+    }
+
+    public int clamp(int value){
+        if(value < 0){
+            return 0;
+        }
+        return value;
+    }
 }
