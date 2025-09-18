@@ -6,11 +6,13 @@ public class Movie {
     String title;
     int runtime;
     int price;
+    int id;
 
-    public Movie(String title, int runtime, int price) {
+    public Movie(String title, int runtime, int price, int id) {
         this.title = title;
         this.runtime = runtime;
         this.price = price;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -21,6 +23,9 @@ public class Movie {
     }
     public int getPrice() {
         return price;
+    }
+    public int getId() {
+        return id;
     }
 
 }
